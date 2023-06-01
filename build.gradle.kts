@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.ben.manes.versions)
     alias(libs.plugins.version.catalog.update)
+    alias(libs.plugins.androidLibrary) apply false
 }
 
 // Variable para pillar versiones estables

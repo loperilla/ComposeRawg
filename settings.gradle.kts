@@ -15,4 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeRawg"
 include(":app")
- 
+include(":datasource")
+include(":data")
+include(":domain")
+include(":model")
+include(":core-ui")

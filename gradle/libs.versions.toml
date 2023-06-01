@@ -8,6 +8,10 @@ espresso-core = "3.5.1"
 junit = "4.13.2"
 kotlin = "1.8.21"
 lifecycle-runtime-ktx = "2.6.1"
+appcompat = "1.6.1"
+material = "1.9.0"
+compose-compiler = "1.4.7"
+
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -24,9 +28,12 @@ ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 ben-manes-versions = "com.github.ben-manes.versions:0.46.0"
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.0"
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
