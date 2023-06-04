@@ -5,14 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.loperilla.presentation.creators.CreatorList
 import com.loperilla.presentation.creators.CreatorsViewModel
 import com.loperilla.rawg.coreui.Routes
@@ -34,8 +33,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(it)
                     ) {
                         composable(Routes.HOME) {
-                            val creatorViewModel: CreatorsViewModel = hiltViewModel()
-                            val creatorList by creatorViewModel.creatorList.collectAsStateWithLifecycle()
+                            val creatorViewModel = hiltViewModel<CreatorsViewModel>()
+                            val creatorList = creatorViewModel.getPagingCreators().collectAsLazyPagingItems()
 
                             CreatorList(
                                 creatorList = creatorList

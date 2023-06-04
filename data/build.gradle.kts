@@ -39,6 +39,8 @@ dependencies {
     // Compose
     implementation(platform(libs.compose.bom))
 
+    implementation(libs.bundles.paging)
+
     // Datastore
     implementation(libs.datastore)
     // Hilt

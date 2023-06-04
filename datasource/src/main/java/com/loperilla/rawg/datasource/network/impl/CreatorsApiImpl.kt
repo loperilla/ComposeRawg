@@ -21,7 +21,7 @@ class CreatorsApiImpl @Inject constructor(
     private val httpClient: HttpClient,
     private val json: Json
 ) : CreatorsApi {
-    override suspend fun getAllPlatforms(): BaseResponse<CreatorResponse> {
+    override suspend fun getAllPlatforms(page: Int): BaseResponse<CreatorResponse> {
         return processResponse(
             json
         ) {
@@ -30,6 +30,9 @@ class CreatorsApiImpl @Inject constructor(
                 url {
                     url("$BASE_URL$CREATORS")
                     parameters.append(NetworkConstants.API_KEY_NAME, BuildConfig.API_KEY)
+                    if (page != 0) {
+                        parameters.append("page", "$page")
+                    }
                 }
             }
         }

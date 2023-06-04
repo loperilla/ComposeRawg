@@ -11,7 +11,7 @@ data class CreatorResponse(
     @SerialName("games") val creatorGame: List<CreatorGameResponse>,
     @SerialName("slug") val slug: String,
     @SerialName("games_count") val games_count: Int,
-    @SerialName("image") val image: String,
+    @SerialName("image") val image: String?,
     @SerialName("image_background") val image_background: String,
     @SerialName("name") val name: String,
     @SerialName("positions") val positions: List<CreatorPositionResponse>
@@ -22,7 +22,7 @@ data class CreatorResponse(
         },
         games_count,
         id,
-        image,
+        image ?: "",
         image_background,
         name,
         positions.map {

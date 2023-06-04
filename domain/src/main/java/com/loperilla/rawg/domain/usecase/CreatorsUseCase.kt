@@ -6,5 +6,7 @@ import javax.inject.Inject
 class CreatorsUseCase @Inject constructor(
     private val creatorRepository: CreatorRepository
 ) {
-    suspend fun getCreatorList() = creatorRepository.getAllCreators()
+    fun getCreatorList() = creatorRepository
+        .getAllCreators()
+
 }
