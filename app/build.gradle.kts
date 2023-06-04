@@ -2,6 +2,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -28,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -48,15 +51,31 @@ android {
 }
 
 dependencies {
-
     implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
+    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.lifecycle.compose.runtime)
+    implementation(libs.lifecycle.compose.viewmodel)
+
+    implementation(project(MyConfiguration.Modules.COREUI))
+    implementation(project(MyConfiguration.Modules.DOMAIN))
+    implementation(project(MyConfiguration.Modules.MODEL))
+    implementation(project(MyConfiguration.Modules.PRESENTATION))
+
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.hilt.navigation)
+    implementation(libs.compose.navigation)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
+    kapt(libs.hilt.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

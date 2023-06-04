@@ -1,18 +1,31 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+    id("kotlinx-serialization")
 }
 
 android {
-    namespace = "com.loperilla.rawg.datasource"
-    compileSdk = 33
+    namespace = "${MyConfiguration.myApplicationIdConfig}.datasource"
+    compileSdk = MyConfiguration.configCompileSdkVersion
 
     defaultConfig {
-        minSdk = 24
+        minSdk = MyConfiguration.configMinSdkVersion
+        targetSdk = MyConfiguration.configTargetSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        val key: String = gradleLocalProperties(rootDir).getProperty("API_KEY")
+        buildConfigField(
+            "String",
+            "API_KEY",
+            key
+        )
     }
 
     buildTypes {
@@ -22,20 +35,23 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
+    implementation(project(MyConfiguration.MAP_MODULES.MODEL))
 
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    //Datastore
+    implementation(libs.datastore)
+    //Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    //ktor
+    implementation(libs.bundles.ktor)
 }
