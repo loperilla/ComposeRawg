@@ -3,8 +3,8 @@ package com.loperilla.rawg.datasource.di
 import android.content.Context
 import android.util.Log
 import com.loperilla.rawg.datasource.network.NetworkInterceptor
-import com.loperilla.rawg.datasource.network.api.CreatorsApi
-import com.loperilla.rawg.datasource.network.impl.CreatorsApiImpl
+import com.loperilla.rawg.datasource.network.api.GameGenreApi
+import com.loperilla.rawg.datasource.network.impl.GenreApiImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,12 +31,19 @@ object DataSourceDependencyInjector {
 
     @Provides
     @Singleton
-    fun provideCreatorsApi(
+    fun provideGenreApi(
         httpClient: HttpClient,
         json: Json
-    ): CreatorsApi = CreatorsApiImpl(
-        httpClient, json
-    )
+    ): GameGenreApi = GenreApiImpl(httpClient, json)
+
+//    @Provides
+//    @Singleton
+//    fun provideCreatorsApi(
+//        httpClient: HttpClient,
+//        json: Json
+//    ): CreatorsApi = CreatorsApiImpl(
+//        httpClient, json
+//    )
 
     @Provides
     @Singleton
@@ -87,16 +94,13 @@ object DataSourceDependencyInjector {
     fun provideNetworkInterceptor(context: Context) = NetworkInterceptor(context)
 
     @OptIn(ExperimentalSerializationApi::class)
-    @Singleton
     @Provides
     fun providesJson() = Json {
-        Json {
             prettyPrint = true
             isLenient = true
             ignoreUnknownKeys = true
             explicitNulls = true
         }
-    }
 
     @Provides
     @Singleton

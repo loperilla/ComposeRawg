@@ -52,6 +52,14 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
+    // Room
+    implementation(libs.room.ktx)
+    annotationProcessor(libs.room.compiler)
+    kapt(libs.room.compiler)
+
+
     //ktor
     implementation(libs.bundles.ktor)
+
+    testImplementation(libs.junit)
 }

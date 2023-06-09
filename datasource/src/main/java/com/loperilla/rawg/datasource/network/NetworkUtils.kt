@@ -48,4 +48,19 @@ object NetworkUtils {
             ErrorResponse("Unknown error")
         }
     }
+
+    fun String.getPageValue(): Int? {
+        val startIndex = this.indexOf("page=")
+        if (startIndex == -1) return null
+
+        val endIndex = this.indexOf('&', startIndex)
+        val pageValue = if (endIndex != -1) {
+            this.substring(startIndex + 5, endIndex)
+        } else {
+            this.substring(startIndex + 5)
+        }
+
+        return pageValue.toInt()
+
+    }
 }

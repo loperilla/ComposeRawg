@@ -11,9 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.loperilla.presentation.creators.CreatorList
-import com.loperilla.presentation.creators.CreatorsViewModel
+import com.loperilla.presentation.genre.GenreViewModel
 import com.loperilla.rawg.coreui.Routes
 import com.loperilla.rawg.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,12 +31,13 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(it)
                     ) {
                         composable(Routes.HOME) {
-                            val creatorViewModel = hiltViewModel<CreatorsViewModel>()
-                            val creatorList = creatorViewModel.getPagingCreators().collectAsLazyPagingItems()
+                            val genreVM = hiltViewModel<GenreViewModel>()
+//                            val creatorViewModel = hiltViewModel<CreatorsViewModel>()
+//                            val creatorList = creatorViewModel.getPagingCreators().collectAsLazyPagingItems()
 
-                            CreatorList(
-                                creatorList = creatorList
-                            )
+//                            CreatorList(
+//                                creatorList = creatorList
+//                            )
                         }
                     }
                 }
