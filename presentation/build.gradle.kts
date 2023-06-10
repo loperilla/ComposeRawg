@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(MyConfiguration.Modules.DOMAIN))
+    implementation(project(MyConfiguration.Modules.COREUI))
     implementation(project(MyConfiguration.Modules.MODEL))
 
     // Compose
@@ -49,6 +50,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.junit.ktx)
     kapt(libs.hilt.compiler)
 
     // Paging
@@ -61,6 +63,9 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.coil)
+
+    testImplementation(libs.junit)
 
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)

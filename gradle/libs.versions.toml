@@ -15,8 +15,11 @@ ktor-version = "2.3.1"
 lifecycle-runtime-ktx = "2.6.1"
 material = "1.9.0"
 room-version = "2.5.1"
+coil = "2.4.0"
+junit-ktx = "1.1.5"
 
 [libraries]
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-ext-junit" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -54,6 +57,7 @@ ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junit-ktx" }
 
 [bundles]
 ktor = [

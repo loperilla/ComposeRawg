@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,26 +28,21 @@ class MainActivity : ComponentActivity() {
             RawgTheme {
                 val navController = rememberNavController()
 
-                Scaffold(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
-                ) {
+                Scaffold {
                     NavHost(
                         navController = navController,
                         startDestination = Routes.HOME,
                         modifier = Modifier
                             .padding(it)
+                            .padding(
+                                start = 8.dp,
+                                end = 8.dp,
+                                bottom = 8.dp
+                            )
                             .background(MaterialTheme.colorScheme.background)
                     ) {
                         composable(Routes.HOME) {
                             val homeViewModel = hiltViewModel<HomeViewModel>()
-//                            val creatorViewModel = hiltViewModel<CreatorsViewModel>()
-//                            val creatorList = creatorViewModel.getPagingCreators().collectAsLazyPagingItems()
-
-//                            CreatorList(
-//                                creatorList = creatorList
-//                            )
-
                             HomeScreen(
                                 homeViewModel.getAllGames().collectAsLazyPagingItems(),
                                 Modifier

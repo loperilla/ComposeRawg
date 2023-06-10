@@ -1,21 +1,21 @@
 package com.loperilla.presentation
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
+import com.loperilla.presentation.game.GameItem
 import com.loperilla.rawg.model.game.Game
 
 @Composable
@@ -49,10 +49,10 @@ fun GamePagingList(
                 modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            LazyColumn(
-                modifier = modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = modifier,
+                contentPadding = PaddingValues(8.dp)
             ) {
                 items(
                     count = gameItems.itemCount,
@@ -60,12 +60,8 @@ fun GamePagingList(
                     contentType = gameItems.itemContentType()
                 ) { index ->
                     gameItems[index]?.let {
-                        Text(
-                            text = it.name,
-                            color = Color.White
-                        )
+                        GameItem(game = it)
                     }
-
                 }
                 item {
                     if (gameItems.loadState.append is LoadState.Loading) {
