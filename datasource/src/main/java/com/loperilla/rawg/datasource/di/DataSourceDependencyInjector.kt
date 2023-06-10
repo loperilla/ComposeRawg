@@ -3,7 +3,9 @@ package com.loperilla.rawg.datasource.di
 import android.content.Context
 import android.util.Log
 import com.loperilla.rawg.datasource.network.NetworkInterceptor
+import com.loperilla.rawg.datasource.network.api.GameApi
 import com.loperilla.rawg.datasource.network.api.GameGenreApi
+import com.loperilla.rawg.datasource.network.impl.GameApiImpl
 import com.loperilla.rawg.datasource.network.impl.GenreApiImpl
 import dagger.Module
 import dagger.Provides
@@ -35,6 +37,13 @@ object DataSourceDependencyInjector {
         httpClient: HttpClient,
         json: Json
     ): GameGenreApi = GenreApiImpl(httpClient, json)
+
+    @Provides
+    @Singleton
+    fun provideGameApi(
+        httpClient: HttpClient,
+        json: Json
+    ): GameApi = GameApiImpl(httpClient, json)
 
 //    @Provides
 //    @Singleton

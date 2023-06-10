@@ -1,4 +1,4 @@
-package com.loperilla.rawg.ui.theme
+package com.loperilla.rawg.coreui.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -16,15 +16,27 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Eclipse,
+    onPrimary = Eclipse,
+    primaryContainer = Eclipse,
+    onSurface = Eclipse,
+    surface = Eclipse,
+    background = Eclipse,
+    secondary = Gigas,
+    error = AlizarinCrimson,
+    tertiary = Atlantis
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Melanie,
+    onPrimary = Melanie,
+    primaryContainer = Melanie,
+    onSurface = Melanie,
+    surface = Melanie,
+    background = Melanie,
+    secondary = Sail,
+    error = ClassicRose,
+    tertiary = BlueRomance
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -38,7 +50,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun MyApplicationTheme(
+fun RawgTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
@@ -57,7 +69,7 @@ fun MyApplicationTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colorScheme.surface.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }

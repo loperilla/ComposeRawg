@@ -5,4 +5,5 @@ object NetworkConstants {
     const val API_KEY_NAME = "key"
     const val CREATORS = "creators"
     const val GENRES = "genres"
+    const val GAMES = "games"
 }
