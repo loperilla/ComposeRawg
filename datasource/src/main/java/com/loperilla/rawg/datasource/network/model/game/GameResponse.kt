@@ -12,7 +12,7 @@ data class GameResponse(
     val added: Int,
     val short_screenshots: List<ScreenshotResponse>,
     val genres: List<GenreResponse>,
-    val background_image: String,
+    val background_image: String?,
 //    val community_rating: Int?,
     val rating: Double,
     val released: String,
@@ -25,7 +25,7 @@ data class GameResponse(
     val updated: String,
 ) : IRemoteModelResponse<Game>() {
     override fun toDomain() = Game(
-        id, name, background_image
+        id, name, background_image ?: ""
     )
 
 }

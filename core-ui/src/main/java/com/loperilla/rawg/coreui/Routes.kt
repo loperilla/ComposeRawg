@@ -1,5 +1,5 @@
 package com.loperilla.rawg.coreui
 
-object Routes {
-    const val HOME = "home"
+sealed class Routes(val destination: String) {
+    object HOME : Routes("home")
 }

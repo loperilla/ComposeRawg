@@ -17,7 +17,7 @@ import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
     primary = Eclipse,
-    onPrimary = Eclipse,
+    onPrimary = Atlantis,
     primaryContainer = Eclipse,
     onSurface = Eclipse,
     surface = Eclipse,
@@ -29,7 +29,7 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Melanie,
-    onPrimary = Melanie,
+    onPrimary = Sail,
     primaryContainer = Melanie,
     onSurface = Melanie,
     surface = Melanie,
@@ -37,7 +37,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = Sail,
     error = ClassicRose,
     tertiary = BlueRomance
-
+)
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
@@ -47,7 +47,6 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
-)
 
 @Composable
 fun RawgTheme(
@@ -69,7 +68,7 @@ fun RawgTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.surface.toArgb()
+            window.statusBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }

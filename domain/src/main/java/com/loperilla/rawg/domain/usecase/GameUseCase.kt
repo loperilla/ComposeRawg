@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GameUseCase @Inject constructor(
     private val repository: GameRepository
 ) {
-    operator fun invoke() = repository.getGames()
+    operator fun invoke(searchInputQuery: String) = repository.getGames(searchInputQuery)
 }

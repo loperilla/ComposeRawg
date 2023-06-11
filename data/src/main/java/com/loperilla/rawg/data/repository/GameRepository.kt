@@ -9,13 +9,13 @@ import javax.inject.Inject
 class GameRepository @Inject constructor(
     private val gameApi: GameApi
 ) {
-    fun getGames() = Pager(
+    fun getGames(searchInputQuery: String) = Pager(
         config = PagingConfig(
             pageSize = 10,
             enablePlaceholders = true
         ),
         pagingSourceFactory = {
-            GamePagingSource(gameApi)
+            GamePagingSource(gameApi, searchInputQuery)
         }
     ).flow
 }

@@ -1,10 +1,9 @@
 package com.loperilla.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -49,10 +48,10 @@ fun GamePagingList(
                 modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = modifier,
-                contentPadding = PaddingValues(8.dp)
+            LazyColumn(
+                modifier = modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(
                     count = gameItems.itemCount,

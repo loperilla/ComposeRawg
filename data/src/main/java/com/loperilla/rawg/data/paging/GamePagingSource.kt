@@ -13,7 +13,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GamePagingSource @Inject constructor(
-    private val gameApi: GameApi
+    private val gameApi: GameApi,
+    private val query: String
 ) : PagingSource<Int, Game>() {
     override fun getRefreshKey(state: PagingState<Int, Game>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -26,7 +27,7 @@ class GamePagingSource @Inject constructor(
         return withContext(Dispatchers.IO) {
             val currentPage = params.key ?: 0
             try {
-                when (val result = gameApi.getGameList(currentPage)) {
+                when (val result = gameApi.getGameList(currentPage, query)) {
                     is ErrorResponse -> {
                         LoadResult.Error(IOException(result.errorMessage))
                     }

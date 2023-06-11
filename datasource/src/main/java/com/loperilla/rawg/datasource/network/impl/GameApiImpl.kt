@@ -20,7 +20,7 @@ class GameApiImpl @Inject constructor(
     private val httpClient: HttpClient,
     private val json: Json
 ) : GameApi {
-    override suspend fun getGameList(page: Int): BaseResponse<GameResponse> {
+    override suspend fun getGameList(page: Int, query: String): BaseResponse<GameResponse> {
         return processResponse(
             json
         ) {
@@ -31,6 +31,9 @@ class GameApiImpl @Inject constructor(
                     parameters.append(NetworkConstants.API_KEY_NAME, BuildConfig.API_KEY)
                     if (page != 0) {
                         parameter("page", page)
+                    }
+                    if (query.isNotEmpty()) {
+                        parameter("search", query)
                     }
                 }
             }
