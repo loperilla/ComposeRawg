@@ -29,4 +29,10 @@ object RoomDI {
         database: GameDatabase
     ) = database.genreDao()
 
+    @Provides
+    @Singleton
+    fun provideQueryDao(
+        database: GameDatabase
+    ) = database.queryDao()
+
 }

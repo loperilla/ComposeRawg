@@ -7,8 +7,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ShieldMoon
+import androidx.compose.material.icons.rounded.WbSunny
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
@@ -23,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.loperilla.presentation.HomeScreen
+import com.loperilla.presentation.PreviousQuery
 import com.loperilla.presentation.game.HomeViewModel
 import com.loperilla.rawg.coreui.Routes
 import com.loperilla.rawg.coreui.text.TextTitle
@@ -35,10 +41,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RawgTheme {
+            val mainViewModel = hiltViewModel<MainActivityViewModel>()
+            val isDarkThemeSelected = mainViewModel.isDarkThemeSelected.collectAsStateWithLifecycle().value
+            RawgTheme(
+                darkTheme = isDarkThemeSelected
+            ) {
                 Surface {
                     val navController = rememberNavController()
-                    val mainViewModel = hiltViewModel<MainActivityViewModel>()
                     Scaffold(
                         topBar = {
                             CenterAlignedTopAppBar(
@@ -46,6 +55,18 @@ class MainActivity : ComponentActivity() {
                                     TextTitle(
                                         textValue = mainViewModel.topBarTitle.collectAsStateWithLifecycle().value
                                     )
+                                },
+                                actions = {
+                                    IconButton(
+                                        onClick = { mainViewModel.selectNewTheme(!isDarkThemeSelected) }
+                                    ) {
+                                        val icon = if (isDarkThemeSelected) {
+                                            Icons.Rounded.WbSunny
+                                        } else {
+                                            Icons.Rounded.ShieldMoon
+                                        }
+                                        Icon(imageVector = icon, contentDescription = "ThemeIcon")
+                                    }
                                 }
                             )
                         }
@@ -64,6 +85,10 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable(Routes.HOME.destination) {
                                 val homeViewModel = hiltViewModel<HomeViewModel>()
+                                val previousQueryList = homeViewModel.getPreviousQuery().collectAsStateWithLifecycle(
+                                    emptyList(),
+                                    lifecycle
+                                ).value
                                 Column {
                                     SearchBar(
                                         query = homeViewModel.searchInputQuery.collectAsStateWithLifecycle().value,
@@ -79,7 +104,14 @@ class MainActivity : ComponentActivity() {
                                             .padding(bottom = 8.dp)
                                     ) {
                                         // aquí podría poner búsquedar previas.
-                                        Text(text = "No hay ná")
+                                        if (previousQueryList.isEmpty()) {
+                                            Text(text = "No hay ná")
+                                        } else {
+                                            PreviousQuery(
+                                                previousQueryList,
+                                                homeViewModel::searchGamesWithCurrentValue
+                                            )
+                                        }
                                     }
                                     HomeScreen(
                                         homeViewModel.getAllGames().collectAsLazyPagingItems(),

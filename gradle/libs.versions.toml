@@ -27,6 +27,7 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose-compiler" }
 compose-navigation = "androidx.navigation:navigation-compose:2.6.0"
+compose-material_icons_extends = { module = "androidx.compose.material:material-icons-extended" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 datastore = "androidx.datastore:datastore-preferences:1.0.0"
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }

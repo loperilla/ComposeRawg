@@ -2,7 +2,9 @@ package com.loperilla.rawg.data.di
 
 import com.loperilla.rawg.data.repository.GameRepository
 import com.loperilla.rawg.data.repository.GenreRepository
+import com.loperilla.rawg.data.repository.QueryRepository
 import com.loperilla.rawg.datasource.database.dao.GameGenreDao
+import com.loperilla.rawg.datasource.database.dao.QueryDao
 import com.loperilla.rawg.datasource.network.api.GameApi
 import com.loperilla.rawg.datasource.network.api.GameGenreApi
 import dagger.Module
@@ -19,6 +21,12 @@ object DataDependencyInjector {
 //    fun provideCreatorRepository(
 //        creatorsApi: CreatorsApi
 //    ) = CreatorRepository(creatorsApi)
+
+    @Provides
+    @Singleton
+    fun provideQueryRepository(
+        queryDao: QueryDao
+    ) = QueryRepository(queryDao)
 
     @Provides
     @Singleton

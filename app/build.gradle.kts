@@ -70,6 +70,7 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.hilt.navigation)
     implementation(libs.compose.navigation)
+    implementation(libs.compose.material.icons.extends)
 
     // Hilt
     implementation(libs.hilt.android)
